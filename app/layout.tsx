@@ -32,7 +32,7 @@ export default function RootLayout({
           geistSans.variable,
           geistMono.variable,
           "antialiased",
-          "f-full"
+          "h-full w-full"
         )}
       >
         <ThemeProvider
