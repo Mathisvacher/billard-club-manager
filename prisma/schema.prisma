@@ -13,14 +13,86 @@ datasource db {
   provider = "postgresql"
 }
 
-model Review{
-  id String @id @default(cuid())
-  name String
+model Review {
+  id     String @id @default(cuid())
+  name   String
   review String
-  start Int
+  start  Int
 
-  createAt DateTime @default(now())
+  userId String
+  user User @relation(fields: [userId], references: [id],onDelete: Cascade)
+
+  createAt  DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
+// L'utilisateur
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  reviews       Review[]
 
+  @@unique([email])
+  @@map("user")
+}
+
+// Retrouver l'utilisateur quand il refresh la page
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+// Moyen d'authentification
+// -> Email / Password
+// -> Github etc ..
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+// Vérifier des choses 
+// reset password, vérifiy email, magic link etc ...
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}

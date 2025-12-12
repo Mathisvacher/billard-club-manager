@@ -4,29 +4,21 @@ import { prisma } from "@/src/lib/prisma";
 import SelectStar from "./(components)/select-start";
 import { revalidatePath } from "next/cache";
 import EditTitle from "./(components)/edit-title";
+import ReviewForm from "./review-form";
+import { updateReviewAction } from "./review.action";
 
 export default async function ReviewPage() {
   const reviews = await prisma.review.findMany();
 
   const setNewStar = async (reviewId: string, star: number) => {
     "use server";
-    await prisma.review.update({
-      where: { id: reviewId },
-      data: {
-        start: star,
-      },
-    });
+    await updateReviewAction({ reviewId, star });
     revalidatePath("/courses");
   };
 
   const setReviewName = async (reviewId: string, name: string) => {
     "use server";
-    await prisma.review.update({
-      where: { id: reviewId },
-      data: {
-        name: name,
-      },
-    });
+    await updateReviewAction({ reviewId, name });
     revalidatePath("/courses");
   };
 
@@ -53,6 +45,7 @@ export default async function ReviewPage() {
           </CardContent>
         </Card>
       ))}
+      <ReviewForm />
     </main>
   );
 }
