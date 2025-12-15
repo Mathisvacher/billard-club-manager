@@ -64,3 +64,23 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Season
+ * 
+ */
+export type Season = Prisma.SeasonModel
+/**
+ * Model Club
+ * 
+ */
+export type Club = Prisma.ClubModel
+/**
+ * Model Match
+ * 
+ */
+export type Match = Prisma.MatchModel
+/**
+ * Model MatchPlayer
+ * 
+ */
+export type MatchPlayer = Prisma.MatchPlayerModel

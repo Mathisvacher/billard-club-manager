@@ -7,7 +7,7 @@ import {
 import { getUser } from "@/src/lib/auth/auth-server";
 import { unauthorized } from "next/navigation";
 
-export default async function AuthPage() {
+export default async function ProfilePage() {
   const user = await getUser();
   if (!user) {
     return unauthorized();

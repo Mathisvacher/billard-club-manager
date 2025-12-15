@@ -1,4 +1,4 @@
-import { LogOut, User2 } from "lucide-react";
+import { LogOut, User, User2 } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -17,8 +17,10 @@ import { auth } from "../lib/auth/auth";
 
 export const Header = () => {
   return (
-    <header className="flex items-center gap-4 px-4 py-2 border-b  border-x">
-      <Link href="/">App</Link>
+    <header className="flex items-center border  bg-background rounded-2xl px-6 py-3">
+      <Link href="/" className="text-lg font-bold">
+        Billard Challenge
+      </Link>
       <div className="flex-1"></div>
       <Suspense fallback={<Skeleton className="h-10 w-20" />}>
         <AuthButton />
@@ -44,11 +46,8 @@ export const AuthButton = async () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Avatar className="size-6">
-            {user.image ? <AvatarImage src={user.image} /> : null}
-            <AvatarFallback>{user.email[0].toUpperCase()}</AvatarFallback>
-          </Avatar>
+        <Button variant="secondary" size={"lg"} className="text-lg">
+          <User2 strokeWidth={3} />
           <p>{user.name}</p>
         </Button>
       </DropdownMenuTrigger>
@@ -70,7 +69,7 @@ export const AuthButton = async () => {
                   headers: await headers(),
                 });
 
-                redirect("/auth/signin");
+                redirect("/signin");
               }}
             >
               <LogOut className="size-4 " />

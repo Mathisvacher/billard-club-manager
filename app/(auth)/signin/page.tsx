@@ -21,7 +21,7 @@ export default function SignUpPage() {
         <CardFooter>
           <p className="text-sm text-muted-foreground">
             Don't have an account?
-            <Link href="/auth/signup" className="text-blue-600 hover:underline">
+            <Link href="/signup" className="text-blue-600 hover:underline">
               Sign up
             </Link>
           </p>
