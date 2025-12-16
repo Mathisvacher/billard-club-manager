@@ -37,7 +37,7 @@ export default function Sidebar() {
             "hover:bg-secondary bg-background flex justify-start"
           )}
         >
-          <LogOut /> Se deconecter
+          <LogOut /> Se déconnecter
         </Link>
       </div>
     </section>

@@ -20,13 +20,25 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  currentHandicap: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  currentHandicap: number | null
 }
 
 export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
+  lastName: string | null
+  currentHandicap: number | null
   email: string | null
   emailVerified: boolean | null
   image: string | null
@@ -39,6 +51,8 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  lastName: string | null
+  currentHandicap: number | null
   email: string | null
   emailVerified: boolean | null
   image: string | null
@@ -51,6 +65,8 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   name: number
+  lastName: number
+  currentHandicap: number
   email: number
   emailVerified: number
   image: number
@@ -62,9 +78,19 @@ export type UserCountAggregateOutputType = {
 }
 
 
+export type UserAvgAggregateInputType = {
+  currentHandicap?: true
+}
+
+export type UserSumAggregateInputType = {
+  currentHandicap?: true
+}
+
 export type UserMinAggregateInputType = {
   id?: true
   name?: true
+  lastName?: true
+  currentHandicap?: true
   email?: true
   emailVerified?: true
   image?: true
@@ -77,6 +103,8 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
+  lastName?: true
+  currentHandicap?: true
   email?: true
   emailVerified?: true
   image?: true
@@ -89,6 +117,8 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
+  lastName?: true
+  currentHandicap?: true
   email?: true
   emailVerified?: true
   image?: true
@@ -137,6 +167,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -167,6 +209,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -174,6 +218,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified: boolean
   image: string | null
@@ -182,6 +228,8 @@ export type UserGroupByOutputType = {
   role: $Enums.Role
   clubId: string | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -207,6 +255,8 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
+  lastName?: Prisma.StringFilter<"User"> | string
+  currentHandicap?: Prisma.IntFilter<"User"> | number
   email?: Prisma.StringFilter<"User"> | string
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
@@ -226,6 +276,8 @@ export type UserWhereInput = {
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  currentHandicap?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -249,6 +301,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
+  lastName?: Prisma.StringFilter<"User"> | string
+  currentHandicap?: Prisma.IntFilter<"User"> | number
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -267,6 +321,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  currentHandicap?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -275,8 +331,10 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   clubId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -285,6 +343,8 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
+  lastName?: Prisma.StringWithAggregatesFilter<"User"> | string
+  currentHandicap?: Prisma.IntWithAggregatesFilter<"User"> | number
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -297,6 +357,8 @@ export type UserScalarWhereWithAggregatesInput = {
 export type UserCreateInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -315,6 +377,8 @@ export type UserCreateInput = {
 export type UserUncheckedCreateInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -333,6 +397,8 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -351,6 +417,8 @@ export type UserUpdateInput = {
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -369,6 +437,8 @@ export type UserUncheckedUpdateInput = {
 export type UserCreateManyInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -381,6 +451,8 @@ export type UserCreateManyInput = {
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -392,6 +464,8 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -409,6 +483,8 @@ export type UserScalarRelationFilter = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  currentHandicap?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
@@ -418,9 +494,15 @@ export type UserCountOrderByAggregateInput = {
   clubId?: Prisma.SortOrder
 }
 
+export type UserAvgOrderByAggregateInput = {
+  currentHandicap?: Prisma.SortOrder
+}
+
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  currentHandicap?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
@@ -433,6 +515,8 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  currentHandicap?: Prisma.SortOrder
   email?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   image?: Prisma.SortOrder
@@ -440,6 +524,10 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  currentHandicap?: Prisma.SortOrder
 }
 
 export type UserListRelationFilter = {
@@ -600,6 +688,8 @@ export type UserUpdateOneRequiredWithoutMatchPlayersNestedInput = {
 export type UserCreateWithoutReviewsInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -617,6 +707,8 @@ export type UserCreateWithoutReviewsInput = {
 export type UserUncheckedCreateWithoutReviewsInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -650,6 +742,8 @@ export type UserUpdateToOneWithWhereWithoutReviewsInput = {
 export type UserUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -667,6 +761,8 @@ export type UserUpdateWithoutReviewsInput = {
 export type UserUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -684,6 +780,8 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -701,6 +799,8 @@ export type UserCreateWithoutSessionsInput = {
 export type UserUncheckedCreateWithoutSessionsInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -734,6 +834,8 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -751,6 +853,8 @@ export type UserUpdateWithoutSessionsInput = {
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -768,6 +872,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
 export type UserCreateWithoutAccountsInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -785,6 +891,8 @@ export type UserCreateWithoutAccountsInput = {
 export type UserUncheckedCreateWithoutAccountsInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -818,6 +926,8 @@ export type UserUpdateToOneWithWhereWithoutAccountsInput = {
 export type UserUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -835,6 +945,8 @@ export type UserUpdateWithoutAccountsInput = {
 export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -852,6 +964,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCreateWithoutClubInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -869,6 +983,8 @@ export type UserCreateWithoutClubInput = {
 export type UserUncheckedCreateWithoutClubInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -915,6 +1031,8 @@ export type UserScalarWhereInput = {
   NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
+  lastName?: Prisma.StringFilter<"User"> | string
+  currentHandicap?: Prisma.IntFilter<"User"> | number
   email?: Prisma.StringFilter<"User"> | string
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
@@ -927,6 +1045,8 @@ export type UserScalarWhereInput = {
 export type UserCreateWithoutCreatedMatchesInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -944,6 +1064,8 @@ export type UserCreateWithoutCreatedMatchesInput = {
 export type UserUncheckedCreateWithoutCreatedMatchesInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -966,6 +1088,8 @@ export type UserCreateOrConnectWithoutCreatedMatchesInput = {
 export type UserCreateWithoutWonMatchesInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -983,6 +1107,8 @@ export type UserCreateWithoutWonMatchesInput = {
 export type UserUncheckedCreateWithoutWonMatchesInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1016,6 +1142,8 @@ export type UserUpdateToOneWithWhereWithoutCreatedMatchesInput = {
 export type UserUpdateWithoutCreatedMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1033,6 +1161,8 @@ export type UserUpdateWithoutCreatedMatchesInput = {
 export type UserUncheckedUpdateWithoutCreatedMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1061,6 +1191,8 @@ export type UserUpdateToOneWithWhereWithoutWonMatchesInput = {
 export type UserUpdateWithoutWonMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1078,6 +1210,8 @@ export type UserUpdateWithoutWonMatchesInput = {
 export type UserUncheckedUpdateWithoutWonMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1095,6 +1229,8 @@ export type UserUncheckedUpdateWithoutWonMatchesInput = {
 export type UserCreateWithoutMatchPlayersInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1112,6 +1248,8 @@ export type UserCreateWithoutMatchPlayersInput = {
 export type UserUncheckedCreateWithoutMatchPlayersInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1145,6 +1283,8 @@ export type UserUpdateToOneWithWhereWithoutMatchPlayersInput = {
 export type UserUpdateWithoutMatchPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1162,6 +1302,8 @@ export type UserUpdateWithoutMatchPlayersInput = {
 export type UserUncheckedUpdateWithoutMatchPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1179,6 +1321,8 @@ export type UserUncheckedUpdateWithoutMatchPlayersInput = {
 export type UserCreateManyClubInput = {
   id: string
   name: string
+  lastName: string
+  currentHandicap: number
   email: string
   emailVerified?: boolean
   image?: string | null
@@ -1190,6 +1334,8 @@ export type UserCreateManyClubInput = {
 export type UserUpdateWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1207,6 +1353,8 @@ export type UserUpdateWithoutClubInput = {
 export type UserUncheckedUpdateWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1224,6 +1372,8 @@ export type UserUncheckedUpdateWithoutClubInput = {
 export type UserUncheckedUpdateManyWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  currentHandicap?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1311,6 +1461,8 @@ export type UserCountOutputTypeCountWonMatchesArgs<ExtArgs extends runtime.Types
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  lastName?: boolean
+  currentHandicap?: boolean
   email?: boolean
   emailVerified?: boolean
   image?: boolean
@@ -1331,6 +1483,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  lastName?: boolean
+  currentHandicap?: boolean
   email?: boolean
   emailVerified?: boolean
   image?: boolean
@@ -1344,6 +1498,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  lastName?: boolean
+  currentHandicap?: boolean
   email?: boolean
   emailVerified?: boolean
   image?: boolean
@@ -1357,6 +1513,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectScalar = {
   id?: boolean
   name?: boolean
+  lastName?: boolean
+  currentHandicap?: boolean
   email?: boolean
   emailVerified?: boolean
   image?: boolean
@@ -1366,7 +1524,7 @@ export type UserSelectScalar = {
   clubId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "role" | "clubId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "lastName" | "currentHandicap" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "role" | "clubId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
@@ -1398,6 +1556,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    lastName: string
+    currentHandicap: number
     email: string
     emailVerified: boolean
     image: string | null
@@ -1837,6 +1997,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly lastName: Prisma.FieldRef<"User", 'String'>
+  readonly currentHandicap: Prisma.FieldRef<"User", 'Int'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly image: Prisma.FieldRef<"User", 'String'>

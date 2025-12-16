@@ -30,6 +30,8 @@ model Review {
 model User {
   id            String   @id
   name          String
+  lastName      String
+  currentHandicap Int
   email         String
   emailVerified Boolean  @default(false)
   image         String?

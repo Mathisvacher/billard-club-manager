@@ -94,6 +94,8 @@ export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof 
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  lastName: 'lastName',
+  currentHandicap: 'currentHandicap',
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',

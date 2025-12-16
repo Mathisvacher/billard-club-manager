@@ -1,9 +1,8 @@
-import { LogOut, User, User2 } from "lucide-react";
+import { LogOut, User2 } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button, buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
@@ -14,14 +13,17 @@ import {
 import { Skeleton } from "./ui/skeleton";
 import { getUser } from "../lib/auth/auth-server";
 import { auth } from "../lib/auth/auth";
+import HeaderActiveLink from "./header-active-link";
 
 export const Header = () => {
   return (
-    <header className="flex items-center border  bg-background rounded-2xl px-6 py-3">
-      <Link href="/" className="text-lg font-bold">
-        Billard Challenge
-      </Link>
-      <div className="flex-1"></div>
+    <header className="flex items-center justify-between border  bg-background rounded-2xl px-6 py-3">
+      <div className="flex gap-6 items-center">
+        <Link href="/dashboard" className="text-lg font-bold">
+          Billard Challenge
+        </Link>
+        <HeaderActiveLink href={"/dashboard"} label={"Tableau de bord"} />
+      </div>
       <Suspense fallback={<Skeleton className="h-10 w-20" />}>
         <AuthButton />
       </Suspense>
