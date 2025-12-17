@@ -20,8 +20,10 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const MatchType = {
   TROIS_BANDES: 'TROIS_BANDES',
+  BANDES: 'BANDES',
+  TROIS_BANDES_2_80: 'TROIS_BANDES_2_80',
   LIBRE: 'LIBRE',
-  DEUX_POINT_HUIT_ZERO: 'DEUX_POINT_HUIT_ZERO'
+  CADRE: 'CADRE'
 } as const
 
 export type MatchType = (typeof MatchType)[keyof typeof MatchType]

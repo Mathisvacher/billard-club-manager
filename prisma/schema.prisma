@@ -30,11 +30,10 @@ model Review {
 model User {
   id            String   @id
   name          String
-  lastName      String
-  currentHandicap Int
+  lastName      String?
+  currentHandicap Int?
   email         String
   emailVerified Boolean  @default(false)
-  image         String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   role          Role     @default(PLAYER)
@@ -136,20 +135,18 @@ model Club {
   users   User[]
   matches Match[]
   seasons Season[]
-
-  createdAt DateTime @default(now())
 }
 
 model Match {
   id   String    @id @default(uuid())
-  date DateTime  @default(now())
+  date DateTime?  @default(now())
   type MatchType
 
   clubId String
   club   Club   @relation(fields: [clubId], references: [id])
 
-  seasonId String
-  season   Season @relation(fields: [seasonId], references: [id])
+  seasonId String?
+  season   Season? @relation(fields: [seasonId], references: [id])
 
   createdBy String
   creator   User   @relation("CreatedMatches", fields: [createdBy], references: [id])
@@ -162,8 +159,10 @@ model Match {
 
 enum MatchType {
   TROIS_BANDES
+  BANDES
+  TROIS_BANDES_2_80
   LIBRE
-  DEUX_POINT_HUIT_ZERO
+  CADRE
 }
 
 model MatchPlayer {

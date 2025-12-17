@@ -1,11 +1,18 @@
-import { User } from "better-auth";
 import NewMatchBtn from "./new-match-btn";
+import { getUserData } from "@/src/lib/data/user.action";
+import { redirect } from "next/navigation";
+import { getUsersInSameClub } from "@/src/lib/data/club.action";
 
-interface MatchsSectionProps {
-  user: User;
-}
+export default async function MatchsSection() {
+  const result = await getUserData();
+  const user = result.data;
+  if (!user) {
+    redirect("signup");
+  }
 
-export default function MatchsSection({ user }: MatchsSectionProps) {
+  const res = await getUsersInSameClub();
+  const clubUsersList = res.data || [];
+
   return (
     <section className="bg-background rounded-2xl border w-full h-full flex flex-col justify-between  items-center  ">
       {/* CONTENT */}
@@ -13,7 +20,7 @@ export default function MatchsSection({ user }: MatchsSectionProps) {
         matchs {user.name}
       </div>
       {/* FOOTER */}
-      <NewMatchBtn />
+      <NewMatchBtn user={user} clubUsersList={clubUsersList} />
     </section>
   );
 }

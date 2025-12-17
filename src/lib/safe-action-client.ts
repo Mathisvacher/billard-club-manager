@@ -1,4 +1,3 @@
-import next from "next";
 import { createSafeActionClient } from "next-safe-action";
 import { getUser } from "./auth/auth-server";
 
@@ -18,6 +17,8 @@ export const actionClient = createSafeActionClient({
     if (error instanceof SafeError) {
       return error.message;
     }
+    console.log("###ERROR###");
+    console.error(error);
     return "Something went wrong";
   },
 });
