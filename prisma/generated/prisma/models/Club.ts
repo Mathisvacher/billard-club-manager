@@ -28,21 +28,18 @@ export type ClubMinAggregateOutputType = {
   id: string | null
   name: string | null
   fullname: string | null
-  createdAt: Date | null
 }
 
 export type ClubMaxAggregateOutputType = {
   id: string | null
   name: string | null
   fullname: string | null
-  createdAt: Date | null
 }
 
 export type ClubCountAggregateOutputType = {
   id: number
   name: number
   fullname: number
-  createdAt: number
   _all: number
 }
 
@@ -51,21 +48,18 @@ export type ClubMinAggregateInputType = {
   id?: true
   name?: true
   fullname?: true
-  createdAt?: true
 }
 
 export type ClubMaxAggregateInputType = {
   id?: true
   name?: true
   fullname?: true
-  createdAt?: true
 }
 
 export type ClubCountAggregateInputType = {
   id?: true
   name?: true
   fullname?: true
-  createdAt?: true
   _all?: true
 }
 
@@ -145,7 +139,6 @@ export type ClubGroupByOutputType = {
   id: string
   name: string
   fullname: string
-  createdAt: Date
   _count: ClubCountAggregateOutputType | null
   _min: ClubMinAggregateOutputType | null
   _max: ClubMaxAggregateOutputType | null
@@ -173,7 +166,6 @@ export type ClubWhereInput = {
   id?: Prisma.StringFilter<"Club"> | string
   name?: Prisma.StringFilter<"Club"> | string
   fullname?: Prisma.StringFilter<"Club"> | string
-  createdAt?: Prisma.DateTimeFilter<"Club"> | Date | string
   users?: Prisma.UserListRelationFilter
   matches?: Prisma.MatchListRelationFilter
   seasons?: Prisma.SeasonListRelationFilter
@@ -183,7 +175,6 @@ export type ClubOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   fullname?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
   matches?: Prisma.MatchOrderByRelationAggregateInput
   seasons?: Prisma.SeasonOrderByRelationAggregateInput
@@ -196,7 +187,6 @@ export type ClubWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ClubWhereInput | Prisma.ClubWhereInput[]
   name?: Prisma.StringFilter<"Club"> | string
   fullname?: Prisma.StringFilter<"Club"> | string
-  createdAt?: Prisma.DateTimeFilter<"Club"> | Date | string
   users?: Prisma.UserListRelationFilter
   matches?: Prisma.MatchListRelationFilter
   seasons?: Prisma.SeasonListRelationFilter
@@ -206,7 +196,6 @@ export type ClubOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   fullname?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   _count?: Prisma.ClubCountOrderByAggregateInput
   _max?: Prisma.ClubMaxOrderByAggregateInput
   _min?: Prisma.ClubMinOrderByAggregateInput
@@ -219,14 +208,12 @@ export type ClubScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Club"> | string
   name?: Prisma.StringWithAggregatesFilter<"Club"> | string
   fullname?: Prisma.StringWithAggregatesFilter<"Club"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Club"> | Date | string
 }
 
 export type ClubCreateInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutClubInput
   matches?: Prisma.MatchCreateNestedManyWithoutClubInput
   seasons?: Prisma.SeasonCreateNestedManyWithoutClubInput
@@ -236,7 +223,6 @@ export type ClubUncheckedCreateInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClubInput
   matches?: Prisma.MatchUncheckedCreateNestedManyWithoutClubInput
   seasons?: Prisma.SeasonUncheckedCreateNestedManyWithoutClubInput
@@ -246,7 +232,6 @@ export type ClubUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutClubNestedInput
   matches?: Prisma.MatchUpdateManyWithoutClubNestedInput
   seasons?: Prisma.SeasonUpdateManyWithoutClubNestedInput
@@ -256,7 +241,6 @@ export type ClubUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutClubNestedInput
   matches?: Prisma.MatchUncheckedUpdateManyWithoutClubNestedInput
   seasons?: Prisma.SeasonUncheckedUpdateManyWithoutClubNestedInput
@@ -266,21 +250,18 @@ export type ClubCreateManyInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
 }
 
 export type ClubUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClubUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClubNullableScalarRelationFilter = {
@@ -297,21 +278,18 @@ export type ClubCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   fullname?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
 }
 
 export type ClubMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   fullname?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
 }
 
 export type ClubMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   fullname?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
 }
 
 export type ClubCreateNestedOneWithoutUsersInput = {
@@ -362,7 +340,6 @@ export type ClubCreateWithoutUsersInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   matches?: Prisma.MatchCreateNestedManyWithoutClubInput
   seasons?: Prisma.SeasonCreateNestedManyWithoutClubInput
 }
@@ -371,7 +348,6 @@ export type ClubUncheckedCreateWithoutUsersInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   matches?: Prisma.MatchUncheckedCreateNestedManyWithoutClubInput
   seasons?: Prisma.SeasonUncheckedCreateNestedManyWithoutClubInput
 }
@@ -396,7 +372,6 @@ export type ClubUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   matches?: Prisma.MatchUpdateManyWithoutClubNestedInput
   seasons?: Prisma.SeasonUpdateManyWithoutClubNestedInput
 }
@@ -405,7 +380,6 @@ export type ClubUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   matches?: Prisma.MatchUncheckedUpdateManyWithoutClubNestedInput
   seasons?: Prisma.SeasonUncheckedUpdateManyWithoutClubNestedInput
 }
@@ -414,7 +388,6 @@ export type ClubCreateWithoutSeasonsInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutClubInput
   matches?: Prisma.MatchCreateNestedManyWithoutClubInput
 }
@@ -423,7 +396,6 @@ export type ClubUncheckedCreateWithoutSeasonsInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClubInput
   matches?: Prisma.MatchUncheckedCreateNestedManyWithoutClubInput
 }
@@ -448,7 +420,6 @@ export type ClubUpdateWithoutSeasonsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutClubNestedInput
   matches?: Prisma.MatchUpdateManyWithoutClubNestedInput
 }
@@ -457,7 +428,6 @@ export type ClubUncheckedUpdateWithoutSeasonsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutClubNestedInput
   matches?: Prisma.MatchUncheckedUpdateManyWithoutClubNestedInput
 }
@@ -466,7 +436,6 @@ export type ClubCreateWithoutMatchesInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutClubInput
   seasons?: Prisma.SeasonCreateNestedManyWithoutClubInput
 }
@@ -475,7 +444,6 @@ export type ClubUncheckedCreateWithoutMatchesInput = {
   id?: string
   name: string
   fullname: string
-  createdAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClubInput
   seasons?: Prisma.SeasonUncheckedCreateNestedManyWithoutClubInput
 }
@@ -500,7 +468,6 @@ export type ClubUpdateWithoutMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutClubNestedInput
   seasons?: Prisma.SeasonUpdateManyWithoutClubNestedInput
 }
@@ -509,7 +476,6 @@ export type ClubUncheckedUpdateWithoutMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   fullname?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutClubNestedInput
   seasons?: Prisma.SeasonUncheckedUpdateManyWithoutClubNestedInput
 }
@@ -567,7 +533,6 @@ export type ClubSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   name?: boolean
   fullname?: boolean
-  createdAt?: boolean
   users?: boolean | Prisma.Club$usersArgs<ExtArgs>
   matches?: boolean | Prisma.Club$matchesArgs<ExtArgs>
   seasons?: boolean | Prisma.Club$seasonsArgs<ExtArgs>
@@ -578,24 +543,21 @@ export type ClubSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   name?: boolean
   fullname?: boolean
-  createdAt?: boolean
 }, ExtArgs["result"]["club"]>
 
 export type ClubSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   fullname?: boolean
-  createdAt?: boolean
 }, ExtArgs["result"]["club"]>
 
 export type ClubSelectScalar = {
   id?: boolean
   name?: boolean
   fullname?: boolean
-  createdAt?: boolean
 }
 
-export type ClubOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "fullname" | "createdAt", ExtArgs["result"]["club"]>
+export type ClubOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "fullname", ExtArgs["result"]["club"]>
 export type ClubInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Club$usersArgs<ExtArgs>
   matches?: boolean | Prisma.Club$matchesArgs<ExtArgs>
@@ -616,7 +578,6 @@ export type $ClubPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     name: string
     fullname: string
-    createdAt: Date
   }, ExtArgs["result"]["club"]>
   composites: {}
 }
@@ -1046,7 +1007,6 @@ export interface ClubFieldRefs {
   readonly id: Prisma.FieldRef<"Club", 'String'>
   readonly name: Prisma.FieldRef<"Club", 'String'>
   readonly fullname: Prisma.FieldRef<"Club", 'String'>
-  readonly createdAt: Prisma.FieldRef<"Club", 'DateTime'>
 }
     
 

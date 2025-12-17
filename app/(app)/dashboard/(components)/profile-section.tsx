@@ -1,25 +1,17 @@
-import { prisma } from "@/src/lib/prisma";
-import { User } from "better-auth";
+import { getUserData } from "@/src/lib/data/user.data";
 import { redirect } from "next/navigation";
 
-interface ProfileSectionProps {
-  user: User;
-}
-
-export default async function ProfileSection({ user }: ProfileSectionProps) {
-  const userData = await prisma.user.findFirst({
-    where: {
-      id: user.id,
-    },
-  });
-  if (!userData) {
+export default async function ProfileSection() {
+  const result = await getUserData();
+  const user = result.data;
+  if (!user) {
     redirect("signup");
   }
   return (
     <div className="bg-background rounded-2xl border w-full h-full flex flex-col justify-center items-center  ">
       <div className="flex gap-2 text-xl font-bold">
-        <p>{`${userData.name} ${userData.lastName.toUpperCase()}`}</p>(
-        {userData.currentHandicap})
+        <p>{`${user.name} ${user.lastName?.toUpperCase()}`}</p>(
+        {user.currentHandicap})
       </div>
       <div className="flex flex-col gap-2">
         <div className="flex gap-2">

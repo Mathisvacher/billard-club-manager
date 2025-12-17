@@ -161,7 +161,7 @@ export type MatchGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type MatchGroupByOutputType = {
   id: string
-  date: Date
+  date: Date | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -192,7 +192,7 @@ export type MatchWhereInput = {
   OR?: Prisma.MatchWhereInput[]
   NOT?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
   id?: Prisma.StringFilter<"Match"> | string
-  date?: Prisma.DateTimeFilter<"Match"> | Date | string
+  date?: Prisma.DateTimeNullableFilter<"Match"> | Date | string | null
   type?: Prisma.EnumMatchTypeFilter<"Match"> | $Enums.MatchType
   clubId?: Prisma.StringFilter<"Match"> | string
   seasonId?: Prisma.StringFilter<"Match"> | string
@@ -207,7 +207,7 @@ export type MatchWhereInput = {
 
 export type MatchOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
+  date?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
   seasonId?: Prisma.SortOrder
@@ -225,7 +225,7 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
   OR?: Prisma.MatchWhereInput[]
   NOT?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
-  date?: Prisma.DateTimeFilter<"Match"> | Date | string
+  date?: Prisma.DateTimeNullableFilter<"Match"> | Date | string | null
   type?: Prisma.EnumMatchTypeFilter<"Match"> | $Enums.MatchType
   clubId?: Prisma.StringFilter<"Match"> | string
   seasonId?: Prisma.StringFilter<"Match"> | string
@@ -240,7 +240,7 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
 
 export type MatchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  date?: Prisma.SortOrder
+  date?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
   seasonId?: Prisma.SortOrder
@@ -256,7 +256,7 @@ export type MatchScalarWhereWithAggregatesInput = {
   OR?: Prisma.MatchScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MatchScalarWhereWithAggregatesInput | Prisma.MatchScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Match"> | string
-  date?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
+  date?: Prisma.DateTimeNullableWithAggregatesFilter<"Match"> | Date | string | null
   type?: Prisma.EnumMatchTypeWithAggregatesFilter<"Match"> | $Enums.MatchType
   clubId?: Prisma.StringWithAggregatesFilter<"Match"> | string
   seasonId?: Prisma.StringWithAggregatesFilter<"Match"> | string
@@ -266,7 +266,7 @@ export type MatchScalarWhereWithAggregatesInput = {
 
 export type MatchCreateInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   club: Prisma.ClubCreateNestedOneWithoutMatchesInput
   season: Prisma.SeasonCreateNestedOneWithoutMatchesInput
@@ -277,7 +277,7 @@ export type MatchCreateInput = {
 
 export type MatchUncheckedCreateInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -288,7 +288,7 @@ export type MatchUncheckedCreateInput = {
 
 export type MatchUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   club?: Prisma.ClubUpdateOneRequiredWithoutMatchesNestedInput
   season?: Prisma.SeasonUpdateOneRequiredWithoutMatchesNestedInput
@@ -299,7 +299,7 @@ export type MatchUpdateInput = {
 
 export type MatchUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -310,7 +310,7 @@ export type MatchUncheckedUpdateInput = {
 
 export type MatchCreateManyInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -320,13 +320,13 @@ export type MatchCreateManyInput = {
 
 export type MatchUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
 }
 
 export type MatchUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -567,7 +567,7 @@ export type MatchUpdateOneRequiredWithoutPlayersNestedInput = {
 
 export type MatchCreateWithoutCreatorInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   club: Prisma.ClubCreateNestedOneWithoutMatchesInput
   season: Prisma.SeasonCreateNestedOneWithoutMatchesInput
@@ -577,7 +577,7 @@ export type MatchCreateWithoutCreatorInput = {
 
 export type MatchUncheckedCreateWithoutCreatorInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -597,7 +597,7 @@ export type MatchCreateManyCreatorInputEnvelope = {
 
 export type MatchCreateWithoutWinnerInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   club: Prisma.ClubCreateNestedOneWithoutMatchesInput
   season: Prisma.SeasonCreateNestedOneWithoutMatchesInput
@@ -607,7 +607,7 @@ export type MatchCreateWithoutWinnerInput = {
 
 export type MatchUncheckedCreateWithoutWinnerInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -646,7 +646,7 @@ export type MatchScalarWhereInput = {
   OR?: Prisma.MatchScalarWhereInput[]
   NOT?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
   id?: Prisma.StringFilter<"Match"> | string
-  date?: Prisma.DateTimeFilter<"Match"> | Date | string
+  date?: Prisma.DateTimeNullableFilter<"Match"> | Date | string | null
   type?: Prisma.EnumMatchTypeFilter<"Match"> | $Enums.MatchType
   clubId?: Prisma.StringFilter<"Match"> | string
   seasonId?: Prisma.StringFilter<"Match"> | string
@@ -672,7 +672,7 @@ export type MatchUpdateManyWithWhereWithoutWinnerInput = {
 
 export type MatchCreateWithoutSeasonInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   club: Prisma.ClubCreateNestedOneWithoutMatchesInput
   creator: Prisma.UserCreateNestedOneWithoutCreatedMatchesInput
@@ -682,7 +682,7 @@ export type MatchCreateWithoutSeasonInput = {
 
 export type MatchUncheckedCreateWithoutSeasonInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   createdBy: string
@@ -718,7 +718,7 @@ export type MatchUpdateManyWithWhereWithoutSeasonInput = {
 
 export type MatchCreateWithoutClubInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   season: Prisma.SeasonCreateNestedOneWithoutMatchesInput
   creator: Prisma.UserCreateNestedOneWithoutCreatedMatchesInput
@@ -728,7 +728,7 @@ export type MatchCreateWithoutClubInput = {
 
 export type MatchUncheckedCreateWithoutClubInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   seasonId: string
   createdBy: string
@@ -764,7 +764,7 @@ export type MatchUpdateManyWithWhereWithoutClubInput = {
 
 export type MatchCreateWithoutPlayersInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   club: Prisma.ClubCreateNestedOneWithoutMatchesInput
   season: Prisma.SeasonCreateNestedOneWithoutMatchesInput
@@ -774,7 +774,7 @@ export type MatchCreateWithoutPlayersInput = {
 
 export type MatchUncheckedCreateWithoutPlayersInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -800,7 +800,7 @@ export type MatchUpdateToOneWithWhereWithoutPlayersInput = {
 
 export type MatchUpdateWithoutPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   club?: Prisma.ClubUpdateOneRequiredWithoutMatchesNestedInput
   season?: Prisma.SeasonUpdateOneRequiredWithoutMatchesNestedInput
@@ -810,7 +810,7 @@ export type MatchUpdateWithoutPlayersInput = {
 
 export type MatchUncheckedUpdateWithoutPlayersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -820,7 +820,7 @@ export type MatchUncheckedUpdateWithoutPlayersInput = {
 
 export type MatchCreateManyCreatorInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -829,7 +829,7 @@ export type MatchCreateManyCreatorInput = {
 
 export type MatchCreateManyWinnerInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   seasonId: string
@@ -838,7 +838,7 @@ export type MatchCreateManyWinnerInput = {
 
 export type MatchUpdateWithoutCreatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   club?: Prisma.ClubUpdateOneRequiredWithoutMatchesNestedInput
   season?: Prisma.SeasonUpdateOneRequiredWithoutMatchesNestedInput
@@ -848,7 +848,7 @@ export type MatchUpdateWithoutCreatorInput = {
 
 export type MatchUncheckedUpdateWithoutCreatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -858,7 +858,7 @@ export type MatchUncheckedUpdateWithoutCreatorInput = {
 
 export type MatchUncheckedUpdateManyWithoutCreatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -867,7 +867,7 @@ export type MatchUncheckedUpdateManyWithoutCreatorInput = {
 
 export type MatchUpdateWithoutWinnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   club?: Prisma.ClubUpdateOneRequiredWithoutMatchesNestedInput
   season?: Prisma.SeasonUpdateOneRequiredWithoutMatchesNestedInput
@@ -877,7 +877,7 @@ export type MatchUpdateWithoutWinnerInput = {
 
 export type MatchUncheckedUpdateWithoutWinnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -887,7 +887,7 @@ export type MatchUncheckedUpdateWithoutWinnerInput = {
 
 export type MatchUncheckedUpdateManyWithoutWinnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -896,7 +896,7 @@ export type MatchUncheckedUpdateManyWithoutWinnerInput = {
 
 export type MatchCreateManySeasonInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   clubId: string
   createdBy: string
@@ -905,7 +905,7 @@ export type MatchCreateManySeasonInput = {
 
 export type MatchUpdateWithoutSeasonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   club?: Prisma.ClubUpdateOneRequiredWithoutMatchesNestedInput
   creator?: Prisma.UserUpdateOneRequiredWithoutCreatedMatchesNestedInput
@@ -915,7 +915,7 @@ export type MatchUpdateWithoutSeasonInput = {
 
 export type MatchUncheckedUpdateWithoutSeasonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
@@ -925,7 +925,7 @@ export type MatchUncheckedUpdateWithoutSeasonInput = {
 
 export type MatchUncheckedUpdateManyWithoutSeasonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
@@ -934,7 +934,7 @@ export type MatchUncheckedUpdateManyWithoutSeasonInput = {
 
 export type MatchCreateManyClubInput = {
   id?: string
-  date?: Date | string
+  date?: Date | string | null
   type: $Enums.MatchType
   seasonId: string
   createdBy: string
@@ -943,7 +943,7 @@ export type MatchCreateManyClubInput = {
 
 export type MatchUpdateWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   season?: Prisma.SeasonUpdateOneRequiredWithoutMatchesNestedInput
   creator?: Prisma.UserUpdateOneRequiredWithoutCreatedMatchesNestedInput
@@ -953,7 +953,7 @@ export type MatchUpdateWithoutClubInput = {
 
 export type MatchUncheckedUpdateWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
@@ -963,7 +963,7 @@ export type MatchUncheckedUpdateWithoutClubInput = {
 
 export type MatchUncheckedUpdateManyWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumMatchTypeFieldUpdateOperationsInput | $Enums.MatchType
   seasonId?: Prisma.StringFieldUpdateOperationsInput | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1088,7 +1088,7 @@ export type $MatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    date: Date
+    date: Date | null
     type: $Enums.MatchType
     clubId: string
     seasonId: string

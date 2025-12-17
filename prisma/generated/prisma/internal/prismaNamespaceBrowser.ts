@@ -98,7 +98,6 @@ export const UserScalarFieldEnum = {
   currentHandicap: 'currentHandicap',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   role: 'role',
@@ -167,8 +166,7 @@ export type SeasonScalarFieldEnum = (typeof SeasonScalarFieldEnum)[keyof typeof 
 export const ClubScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  fullname: 'fullname',
-  createdAt: 'createdAt'
+  fullname: 'fullname'
 } as const
 
 export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]

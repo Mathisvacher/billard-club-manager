@@ -39,6 +39,7 @@ export default function ReviewForm() {
   });
 
   async function onSubmit(values: z.infer<typeof ReviewFormSchema>) {
+    console.log(values);
     await executeAsync(values);
     router.refresh();
   }

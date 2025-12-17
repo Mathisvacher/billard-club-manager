@@ -37,7 +37,7 @@ export const AuthButton = async () => {
   if (!user) {
     return (
       <Link
-        href="/auth/signin"
+        href="/signin"
         className={buttonVariants({ size: "sm", variant: "outline" })}
       >
         Sign in
