@@ -42,10 +42,7 @@ export default function NewMatchBtn({ user, clubUsersList }: NewMatchBtnProps) {
           <MatchForm
             user={user}
             clubUsersList={clubUsersList}
-            onSuccessForm={() => {
-              setOpen(false);
-              console.log("alo ?");
-            }}
+            onSuccessForm={() => setOpen(false)}
           />
         </DialogContent>
       </Dialog>

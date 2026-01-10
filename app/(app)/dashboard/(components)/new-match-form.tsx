@@ -8,6 +8,7 @@ import { Form } from "@/src/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   NumberField,
+  DateField,
   SelectField,
   TextField,
 } from "@/src/components/shared/form-field";
@@ -20,6 +21,7 @@ import { useAction } from "next-safe-action/hooks";
 import { toast } from "sonner";
 import { addMatchSafeAction } from "@/src/lib/action/match.action";
 import { MatchFormSchema } from "@/src/lib/schema/match.schema";
+import { Loader2 } from "lucide-react";
 
 interface MatchFormProps {
   user: Prisma.UserModel;
@@ -32,7 +34,6 @@ export default function MatchForm({
   clubUsersList,
   onSuccessForm,
 }: MatchFormProps) {
-  // // remplacer par API route ?
   const { executeAsync } = useAction(addMatchSafeAction, {
     onSuccess: () => {
       onSuccessForm?.();
@@ -62,15 +63,30 @@ export default function MatchForm({
     resolver: zodResolver(MatchFormSchema),
     defaultValues: {
       type: undefined,
-      points: undefined,
-      opponentPoints: undefined,
-      opponentId: undefined,
-      bestSerie: undefined,
-      opponentBestSerie: undefined,
+      pointsPlayer1: undefined,
+      pointsPlayer2: undefined,
+      idPlayer2: undefined,
+      bestSeriePlayer1: undefined,
+      bestSeriePlayer2: undefined,
       reprises: undefined,
       date: new Date(),
     },
   });
+
+  // Calcul de moyenne
+  const pointsPlayer1 = form.watch("pointsPlayer1");
+  const pointsPlayer2 = form.watch("pointsPlayer2");
+  const reprises = form.watch("reprises");
+
+  const moyennePlayer1 =
+    pointsPlayer1 && reprises && reprises > 0
+      ? Number((pointsPlayer1 / reprises).toFixed(2))
+      : undefined;
+
+  const moyennePlayer2 =
+    pointsPlayer2 && reprises && reprises > 0
+      ? Number((pointsPlayer2 / reprises).toFixed(2))
+      : undefined;
 
   async function onSubmit(values: z.infer<typeof MatchFormSchema>) {
     await executeAsync(values);
@@ -93,7 +109,7 @@ export default function MatchForm({
               label="Type"
               options={matchTypeOptions}
             />
-            <TextField form={form} fieldName={"date"} label="Date" />
+            <DateField form={form} fieldName={"date"} label="Date" />
             <NumberField form={form} fieldName={"reprises"} label="Reprises" />
           </div>
         </div>
@@ -110,13 +126,22 @@ export default function MatchForm({
             disabled
           />
           <div className="flex w-full justify-between gap-2">
-            <NumberField form={form} fieldName={"points"} label="Points" />
-            <NumberField form={form} fieldName={"bestSerie"} label="Série" />
+            <NumberField
+              form={form}
+              fieldName={"pointsPlayer1"}
+              label="Points"
+            />
+            <NumberField
+              form={form}
+              fieldName={"bestSeriePlayer1"}
+              label="Série"
+            />
             <TextField
               form={form}
               fieldName={"MoyenneJoueur1"}
               label="Moyenne"
               disabled
+              computedValue={moyennePlayer1}
             />
           </div>
         </div>
@@ -126,19 +151,19 @@ export default function MatchForm({
           <p className="text-center w-full text-md font-semibold ">JOUEUR 2</p>
           <SelectField
             form={form}
-            fieldName="opponentId"
+            fieldName="idPlayer2"
             options={userOptions}
             placeholder="Sélectionner un joueur"
           />
           <div className="flex w-full justify-between gap-2">
             <NumberField
               form={form}
-              fieldName={"opponentPoints"}
+              fieldName={"pointsPlayer2"}
               label="Points"
             />
             <NumberField
               form={form}
-              fieldName={"opponentBestSerie"}
+              fieldName={"bestSeriePlayer2"}
               label="Série"
             />
             <TextField
@@ -146,6 +171,7 @@ export default function MatchForm({
               fieldName={"MoyenneJoueur2"}
               label="Moyenne"
               disabled
+              computedValue={moyennePlayer2}
             />
           </div>
         </div>
@@ -153,9 +179,24 @@ export default function MatchForm({
           <DialogClose asChild>
             <Button variant="outline">Annuler</Button>
           </DialogClose>
-          <Button type="submit">Ajouter Match</Button>
+
+          <Button
+            type="submit"
+            disabled={form.formState.isSubmitting || !form.formState.isValid}
+          >
+            {form.formState.isSubmitting ? (
+              <>
+                <Loader2 className="animate-spin" /> Ajout du Match
+              </>
+            ) : (
+              <p>Ajouter Match</p>
+            )}
+          </Button>
         </DialogFooter>
       </form>
     </Form>
   );
 }
+
+// {loginForm.formState.isSubmitting ? (
+//  <Loader2 className="animate-spin" />

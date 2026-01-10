@@ -9,10 +9,11 @@ import {
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
 import clsx from "clsx";
-import { Eye, EyeOff, LucideProps } from "lucide-react";
+import { CalendarIcon, Eye, EyeOff, LucideProps } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ForwardRefExoticComponent, RefAttributes, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
+import { format } from "date-fns";
 
 import {
   Select,
@@ -21,6 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
 
 type FormFieldProps = {
   form: UseFormReturn<any>;
@@ -38,6 +42,7 @@ type FormFieldProps = {
   innerIcon?: ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
+  computedValue?: string | number;
 };
 
 function TextField({
@@ -52,6 +57,7 @@ function TextField({
   displayError = true,
   formDescription,
   disabled,
+  computedValue,
 }: FormFieldProps) {
   return (
     <FormField
@@ -86,8 +92,9 @@ function TextField({
                 placeholder={placeholder}
                 type="text"
                 {...field}
+                value={computedValue ?? field.value ?? ""}
                 className={`touch-none ${InnerIcon && "pl-11"}`}
-                disabled={disabled}
+                disabled={disabled || computedValue !== undefined}
               />
             </div>
           </FormControl>
@@ -238,4 +245,51 @@ function NumberField({ form, fieldName, label }: FormFieldProps) {
   );
 }
 
-export { PasswordField, TextField, NumberField };
+function DateField({
+  form,
+  fieldName,
+  label,
+  placeholder,
+  icon: Icon,
+}: FormFieldProps) {
+  const dateFormat = "EEE dd MMM";
+
+  return (
+    <FormField
+      control={form.control}
+      name={fieldName}
+      render={({ field }) => (
+        <FormItem className="w-full">
+          <FormLabel className="flex items-center gap-2">
+            {Icon && <Icon size={20} />}
+            <span>{label}</span>
+          </FormLabel>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="w-full justify-between">
+                {field.value ? (
+                  format(field.value, dateFormat)
+                ) : (
+                  <span className="text-gray-400">{placeholder}</span>
+                )}
+                <CalendarIcon size={20} className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={field.value}
+                onSelect={(date) => field.onChange(date)}
+                disabled={(date) =>
+                  date.getTime() < new Date().setHours(0, 0, 0, 0)
+                }
+              />
+            </PopoverContent>
+          </Popover>
+        </FormItem>
+      )}
+    />
+  );
+}
+
+export { PasswordField, TextField, NumberField, DateField };

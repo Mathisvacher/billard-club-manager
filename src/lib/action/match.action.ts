@@ -14,51 +14,56 @@ export const addMatchSafeAction = actionUser
         id: ctx.user.id,
       },
     });
-
+    const player2 = await prisma.user.findFirst({
+      where: {
+        id: input.idPlayer2,
+      },
+    });
     if (!user?.clubId || user.currentHandicap == null) {
       throw new SafeError("Votre profile manque d'information");
     }
-    // Match
-    const match = await prisma.match.create({
-      data: {
-        date: input.date ? new Date(input.date) : undefined,
-        clubId: user.clubId,
-        type: input.type as MatchType,
-        createdBy: ctx.user.id,
-        seasonId: "u9LUgMZWGoez6yPjuvxzJS2HhvpdRNlW", //TODO trouver comment gerer ça
-      },
-    });
-
-    // Score joueur 1 (user)
-    await prisma.matchPlayer.create({
-      data: {
-        matchId: match.id,
-        playerId: ctx.user.id,
-        handicap: user?.currentHandicap,
-        points: input.points,
-        reprises: input.reprises,
-        bestSerie: input.bestSerie,
-      },
-    });
-
-    // Score joueur 2
-    const opponent = await prisma.user.findFirst({
-      where: {
-        id: input.opponentId,
-      },
-    });
-    if (!opponent?.clubId || opponent.currentHandicap == null) {
-      throw new SafeError("Votre profile manque d'information");
+    if (!player2?.clubId || player2.currentHandicap == null) {
+      throw new SafeError(
+        "Le profile de votre adversaire manque d'information"
+      );
     }
-    await prisma.matchPlayer.create({
-      data: {
-        matchId: match.id,
-        playerId: input.opponentId,
-        handicap: opponent?.currentHandicap,
-        points: input.opponentPoints,
-        reprises: input.reprises,
-        bestSerie: input.opponentBestSerie,
-      },
+
+    const clubId = user.clubId;
+    if (!clubId) throw new SafeError("...");
+
+    await prisma.$transaction(async (tx) => {
+      const match = await tx.match.create({
+        data: {
+          date: input.date,
+          clubId: user.clubId!,
+          type: input.type as MatchType,
+          createdBy: ctx.user.id,
+          seasonId: "BZPAEpiICCysJ0O4UjB9fk1Oj9VzNLyF", //TODO
+        },
+      });
+
+      await tx.matchPlayer.create({
+        data: {
+          matchId: match.id,
+          playerId: ctx.user.id,
+          handicap: user.currentHandicap!,
+          points: input.pointsPlayer1,
+          reprises: input.reprises,
+          bestSerie: input.bestSeriePlayer1,
+        },
+      });
+
+      await tx.matchPlayer.create({
+        data: {
+          matchId: match.id,
+          playerId: input.idPlayer2,
+          handicap: player2.currentHandicap!,
+          points: input.pointsPlayer2,
+          reprises: input.reprises,
+          bestSerie: input.bestSeriePlayer2,
+        },
+      });
     });
+
     revalidatePath("/");
   });

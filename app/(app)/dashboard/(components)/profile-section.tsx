@@ -1,4 +1,4 @@
-import { getUserData } from "@/src/lib/data/user.action";
+import { getUserData } from "@/src/lib/data/user.data";
 import { redirect } from "next/navigation";
 
 export default async function ProfileSection() {

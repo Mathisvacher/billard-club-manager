@@ -169,7 +169,7 @@ model MatchPlayer {
   id String @id @default(uuid())
 
   matchId String
-  match   Match  @relation(fields: [matchId], references: [id])
+  match   Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
 
   playerId String
   player   User   @relation(fields: [playerId], references: [id])
