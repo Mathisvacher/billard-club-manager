@@ -29,6 +29,7 @@ export type SeasonMinAggregateOutputType = {
   name: string | null
   startDate: Date | null
   endDate: Date | null
+  isActive: boolean | null
   clubId: string | null
 }
 
@@ -37,6 +38,7 @@ export type SeasonMaxAggregateOutputType = {
   name: string | null
   startDate: Date | null
   endDate: Date | null
+  isActive: boolean | null
   clubId: string | null
 }
 
@@ -45,6 +47,7 @@ export type SeasonCountAggregateOutputType = {
   name: number
   startDate: number
   endDate: number
+  isActive: number
   clubId: number
   _all: number
 }
@@ -55,6 +58,7 @@ export type SeasonMinAggregateInputType = {
   name?: true
   startDate?: true
   endDate?: true
+  isActive?: true
   clubId?: true
 }
 
@@ -63,6 +67,7 @@ export type SeasonMaxAggregateInputType = {
   name?: true
   startDate?: true
   endDate?: true
+  isActive?: true
   clubId?: true
 }
 
@@ -71,6 +76,7 @@ export type SeasonCountAggregateInputType = {
   name?: true
   startDate?: true
   endDate?: true
+  isActive?: true
   clubId?: true
   _all?: true
 }
@@ -151,7 +157,8 @@ export type SeasonGroupByOutputType = {
   id: string
   name: string
   startDate: Date
-  endDate: Date
+  endDate: Date | null
+  isActive: boolean
   clubId: string
   _count: SeasonCountAggregateOutputType | null
   _min: SeasonMinAggregateOutputType | null
@@ -180,7 +187,8 @@ export type SeasonWhereInput = {
   id?: Prisma.StringFilter<"Season"> | string
   name?: Prisma.StringFilter<"Season"> | string
   startDate?: Prisma.DateTimeFilter<"Season"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Season"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Season"> | Date | string | null
+  isActive?: Prisma.BoolFilter<"Season"> | boolean
   clubId?: Prisma.StringFilter<"Season"> | string
   club?: Prisma.XOR<Prisma.ClubScalarRelationFilter, Prisma.ClubWhereInput>
   matches?: Prisma.MatchListRelationFilter
@@ -190,7 +198,8 @@ export type SeasonOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
   club?: Prisma.ClubOrderByWithRelationInput
   matches?: Prisma.MatchOrderByRelationAggregateInput
@@ -203,7 +212,8 @@ export type SeasonWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SeasonWhereInput | Prisma.SeasonWhereInput[]
   name?: Prisma.StringFilter<"Season"> | string
   startDate?: Prisma.DateTimeFilter<"Season"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Season"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Season"> | Date | string | null
+  isActive?: Prisma.BoolFilter<"Season"> | boolean
   clubId?: Prisma.StringFilter<"Season"> | string
   club?: Prisma.XOR<Prisma.ClubScalarRelationFilter, Prisma.ClubWhereInput>
   matches?: Prisma.MatchListRelationFilter
@@ -213,7 +223,8 @@ export type SeasonOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
   _count?: Prisma.SeasonCountOrderByAggregateInput
   _max?: Prisma.SeasonMaxOrderByAggregateInput
@@ -227,7 +238,8 @@ export type SeasonScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Season"> | string
   name?: Prisma.StringWithAggregatesFilter<"Season"> | string
   startDate?: Prisma.DateTimeWithAggregatesFilter<"Season"> | Date | string
-  endDate?: Prisma.DateTimeWithAggregatesFilter<"Season"> | Date | string
+  endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Season"> | Date | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"Season"> | boolean
   clubId?: Prisma.StringWithAggregatesFilter<"Season"> | string
 }
 
@@ -235,7 +247,8 @@ export type SeasonCreateInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   club: Prisma.ClubCreateNestedOneWithoutSeasonsInput
   matches?: Prisma.MatchCreateNestedManyWithoutSeasonInput
 }
@@ -244,7 +257,8 @@ export type SeasonUncheckedCreateInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   clubId: string
   matches?: Prisma.MatchUncheckedCreateNestedManyWithoutSeasonInput
 }
@@ -253,7 +267,8 @@ export type SeasonUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   club?: Prisma.ClubUpdateOneRequiredWithoutSeasonsNestedInput
   matches?: Prisma.MatchUpdateManyWithoutSeasonNestedInput
 }
@@ -262,7 +277,8 @@ export type SeasonUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
   matches?: Prisma.MatchUncheckedUpdateManyWithoutSeasonNestedInput
 }
@@ -271,7 +287,8 @@ export type SeasonCreateManyInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   clubId: string
 }
 
@@ -279,14 +296,16 @@ export type SeasonUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type SeasonUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -295,6 +314,7 @@ export type SeasonCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
 }
 
@@ -303,6 +323,7 @@ export type SeasonMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
 }
 
@@ -311,6 +332,7 @@ export type SeasonMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   clubId?: Prisma.SortOrder
 }
 
@@ -324,9 +346,9 @@ export type SeasonOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type SeasonScalarRelationFilter = {
-  is?: Prisma.SeasonWhereInput
-  isNot?: Prisma.SeasonWhereInput
+export type SeasonNullableScalarRelationFilter = {
+  is?: Prisma.SeasonWhereInput | null
+  isNot?: Prisma.SeasonWhereInput | null
 }
 
 export type SeasonCreateNestedManyWithoutClubInput = {
@@ -377,10 +399,12 @@ export type SeasonCreateNestedOneWithoutMatchesInput = {
   connect?: Prisma.SeasonWhereUniqueInput
 }
 
-export type SeasonUpdateOneRequiredWithoutMatchesNestedInput = {
+export type SeasonUpdateOneWithoutMatchesNestedInput = {
   create?: Prisma.XOR<Prisma.SeasonCreateWithoutMatchesInput, Prisma.SeasonUncheckedCreateWithoutMatchesInput>
   connectOrCreate?: Prisma.SeasonCreateOrConnectWithoutMatchesInput
   upsert?: Prisma.SeasonUpsertWithoutMatchesInput
+  disconnect?: Prisma.SeasonWhereInput | boolean
+  delete?: Prisma.SeasonWhereInput | boolean
   connect?: Prisma.SeasonWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SeasonUpdateToOneWithWhereWithoutMatchesInput, Prisma.SeasonUpdateWithoutMatchesInput>, Prisma.SeasonUncheckedUpdateWithoutMatchesInput>
 }
@@ -389,7 +413,8 @@ export type SeasonCreateWithoutClubInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   matches?: Prisma.MatchCreateNestedManyWithoutSeasonInput
 }
 
@@ -397,7 +422,8 @@ export type SeasonUncheckedCreateWithoutClubInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   matches?: Prisma.MatchUncheckedCreateNestedManyWithoutSeasonInput
 }
 
@@ -434,7 +460,8 @@ export type SeasonScalarWhereInput = {
   id?: Prisma.StringFilter<"Season"> | string
   name?: Prisma.StringFilter<"Season"> | string
   startDate?: Prisma.DateTimeFilter<"Season"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Season"> | Date | string
+  endDate?: Prisma.DateTimeNullableFilter<"Season"> | Date | string | null
+  isActive?: Prisma.BoolFilter<"Season"> | boolean
   clubId?: Prisma.StringFilter<"Season"> | string
 }
 
@@ -442,7 +469,8 @@ export type SeasonCreateWithoutMatchesInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   club: Prisma.ClubCreateNestedOneWithoutSeasonsInput
 }
 
@@ -450,7 +478,8 @@ export type SeasonUncheckedCreateWithoutMatchesInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
   clubId: string
 }
 
@@ -474,7 +503,8 @@ export type SeasonUpdateWithoutMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   club?: Prisma.ClubUpdateOneRequiredWithoutSeasonsNestedInput
 }
 
@@ -482,7 +512,8 @@ export type SeasonUncheckedUpdateWithoutMatchesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clubId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -490,14 +521,16 @@ export type SeasonCreateManyClubInput = {
   id?: string
   name: string
   startDate: Date | string
-  endDate: Date | string
+  endDate?: Date | string | null
+  isActive: boolean
 }
 
 export type SeasonUpdateWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   matches?: Prisma.MatchUpdateManyWithoutSeasonNestedInput
 }
 
@@ -505,7 +538,8 @@ export type SeasonUncheckedUpdateWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   matches?: Prisma.MatchUncheckedUpdateManyWithoutSeasonNestedInput
 }
 
@@ -513,7 +547,8 @@ export type SeasonUncheckedUpdateManyWithoutClubInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -552,6 +587,7 @@ export type SeasonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name?: boolean
   startDate?: boolean
   endDate?: boolean
+  isActive?: boolean
   clubId?: boolean
   club?: boolean | Prisma.ClubDefaultArgs<ExtArgs>
   matches?: boolean | Prisma.Season$matchesArgs<ExtArgs>
@@ -563,6 +599,7 @@ export type SeasonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   name?: boolean
   startDate?: boolean
   endDate?: boolean
+  isActive?: boolean
   clubId?: boolean
   club?: boolean | Prisma.ClubDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["season"]>
@@ -572,6 +609,7 @@ export type SeasonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   name?: boolean
   startDate?: boolean
   endDate?: boolean
+  isActive?: boolean
   clubId?: boolean
   club?: boolean | Prisma.ClubDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["season"]>
@@ -581,10 +619,11 @@ export type SeasonSelectScalar = {
   name?: boolean
   startDate?: boolean
   endDate?: boolean
+  isActive?: boolean
   clubId?: boolean
 }
 
-export type SeasonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "startDate" | "endDate" | "clubId", ExtArgs["result"]["season"]>
+export type SeasonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "startDate" | "endDate" | "isActive" | "clubId", ExtArgs["result"]["season"]>
 export type SeasonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   club?: boolean | Prisma.ClubDefaultArgs<ExtArgs>
   matches?: boolean | Prisma.Season$matchesArgs<ExtArgs>
@@ -607,7 +646,8 @@ export type $SeasonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     id: string
     name: string
     startDate: Date
-    endDate: Date
+    endDate: Date | null
+    isActive: boolean
     clubId: string
   }, ExtArgs["result"]["season"]>
   composites: {}
@@ -1038,6 +1078,7 @@ export interface SeasonFieldRefs {
   readonly name: Prisma.FieldRef<"Season", 'String'>
   readonly startDate: Prisma.FieldRef<"Season", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"Season", 'DateTime'>
+  readonly isActive: Prisma.FieldRef<"Season", 'Boolean'>
   readonly clubId: Prisma.FieldRef<"Season", 'String'>
 }
     

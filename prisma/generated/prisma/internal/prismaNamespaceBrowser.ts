@@ -157,6 +157,7 @@ export const SeasonScalarFieldEnum = {
   name: 'name',
   startDate: 'startDate',
   endDate: 'endDate',
+  isActive: 'isActive',
   clubId: 'clubId'
 } as const
 
