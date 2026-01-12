@@ -120,7 +120,8 @@ model Season {
   id        String   @id @default(uuid())
   name      String // "Saison 2024-2025"
   startDate DateTime
-  endDate   DateTime
+  endDate   DateTime?
+  isActive  Boolean
 
   clubId  String
   club    Club    @relation(fields: [clubId], references: [id])
