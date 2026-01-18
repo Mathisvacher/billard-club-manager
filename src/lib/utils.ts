@@ -13,3 +13,11 @@ export const MatchTypeLabels: Record<MatchType, string> = {
   [MatchType.TROIS_BANDES]: "3 Bandes",
   [MatchType.TROIS_BANDES_2_80]: "3 Bandes (2,80m)",
 };
+
+export const ROUTES = {
+  matches: "/matches",
+  clubMatches: "/club/matches",
+  ranking: "/ranking",
+  profile: "/profile",
+  help: "help",
+} as const;

@@ -1,4 +1,3 @@
-import { Header } from "@/src/components/header";
 import Sidebar from "@/src/components/sidebar";
 
 export default function AppLayout({
@@ -9,8 +8,6 @@ export default function AppLayout({
   return (
     <div className="h-dvh bg-background-grey overflow-hidden">
       <div className="flex flex-col h-full gap-3 p-3">
-        <Header />
-
         <div className="flex flex-1 gap-3 overflow-hidden">
           <Sidebar />
           <main className="flex-1 overflow-auto">{children}</main>
