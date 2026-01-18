@@ -24,13 +24,14 @@ export const addMatchSafeAction = actionUser
     }
     if (!player2?.clubId || player2.currentHandicap == null) {
       throw new SafeError(
-        "Le profile de votre adversaire manque d'information"
+        "Le profile de votre adversaire manque d'information",
       );
     }
 
     const clubId = user.clubId;
     if (!clubId) throw new SafeError("...");
 
+    //TODO winner et seasonId
     await prisma.$transaction(async (tx) => {
       const match = await tx.match.create({
         data: {
@@ -38,7 +39,7 @@ export const addMatchSafeAction = actionUser
           clubId: user.clubId!,
           type: input.type as MatchType,
           createdBy: ctx.user.id,
-          seasonId: "BZPAEpiICCysJ0O4UjB9fk1Oj9VzNLyF", //TODO
+          seasonId: "9bb5bf10-deb1-4815-a0a4-79f8cfa55e23", //TODO
         },
       });
 

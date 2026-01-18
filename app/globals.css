@@ -26,6 +26,7 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  --color-border-light: var(--border-light);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -43,12 +44,29 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* --- Ajout --- */
+  /* Matche status */
+  --color-foreground-victory: var(--foreground-victory);
+  --color-foreground-defeat: var(--foreground-defeat);
+  --color-background-victory: var(--background-victory);
+  --color-background-defeat: var(--background-defeat);
+  /* Matche type */
+  --color-foreground-libre: var(--foreground-libre);
+  --color-background-libre: var(--background-libre);
+  --color-foreground-cadre: var(--foreground-cadre);
+  --color-background-cadre: var(--background-cadre);
+  --color-foreground-bandes: var(--foreground-bandes);
+  --color-background-bandes: var(--background-bandes);
+  --color-foreground-3bandes: var(--foreground-3bandes);
+  --color-background-3bandes: var(--background-3bandes);
+  --color-foreground-3bandes-280: var(--foreground-3bandes-280);
+  --color-background-3bandes-280: var(--background-3bandes-280);
 }
 
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --background-grey: #fafafa;
+  --background-grey: #f4f4f5;
   --foreground: oklch(0.145 0 0);
   --foreground-grey: #71717a;
   --card: oklch(1 0 0);
@@ -65,6 +83,7 @@
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
+  --border-light: #f3f4f6;
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -80,12 +99,30 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* --- Ajout --- */
+  /* Matche status */
+  --foreground-victory: #15803d;
+  --background-victory: #f0fdf4;
+  --foreground-defeat: #f45f41;
+  --background-defeat: #ffeded;
+  /* Matche type */
+  /* LIBRE – neutre */
+  --background-libre: #52525b;
+  --foreground-libre: #ffffff;
+  --background-cadre: #319a5a;
+  --foreground-cadre: #ffffff;
+  --background-bandes: #2b749b;
+  --foreground-bandes: #ffffff;
+  --background-3bandes: #884fb7;
+  --foreground-3bandes: #ffffff;
+  --background-3bandes-280: #92400e;
+  --foreground-3bandes-280: #ffffff;
 }
 
 .dark {
   --background: oklch(0.145 0 0);
   --background-grey: #fafafa; /* TODO rework*/
-  --foreground: oklch(0.985 0 0);
+  --foreground: oklch(0.985 0 0); /* TODO rework*/
   --foreground-grey: #71717a; /* TODO rework*/
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -101,6 +138,7 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
+  --border-light: oklch(1 0 0 / 10%); /* TODO rework*/
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -116,6 +154,23 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  /* --- Ajout --- */
+  /* Matche status */
+  --foreground-victory: #15803d; /* TODO rework*/
+  --background-victory: #f0fdf4; /* TODO rework*/
+  --foreground-defeat: #f45f41; /* TODO rework*/
+  --background-defeat: #ffeded; /* TODO rework*/
+  /* Matche type */
+  --background-libre: #064e3b; /* TODO rework*/
+  --foreground-cadre: #a7f3d0; /* TODO rework*/
+  --background-cadre: #064e3b;
+  --foreground-cadre: #a7f3d0;
+  --background-bandes: #0c4a6e;
+  --foreground-bandes: #bae6fd;
+  --background-3bandes: #581c87;
+  --foreground-3bandes: #e9d5ff;
+  --background-elite: #78350f;
+  --foreground-elite: #fde68a;
 }
 
 @layer base {

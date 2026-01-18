@@ -13,14 +13,15 @@ import {
 import MatchForm from "./new-match-form";
 import { Prisma } from "@/prisma/generated/prisma/client";
 import { useState } from "react";
+import { useSession } from "@/src/lib/auth/auth-client";
 
 interface NewMatchBtnProps {
-  user: Prisma.UserModel;
   clubUsersList: Prisma.UserModel[];
 }
 
-export default function NewMatchBtn({ user, clubUsersList }: NewMatchBtnProps) {
+export default function NewMatchBtn({ clubUsersList }: NewMatchBtnProps) {
   const [open, setOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <div className="p-3 flex w-full justify-end">
@@ -40,7 +41,7 @@ export default function NewMatchBtn({ user, clubUsersList }: NewMatchBtnProps) {
           </DialogHeader>
           {/* FORM */}
           <MatchForm
-            user={user}
+            userAuthId={session?.user.id}
             clubUsersList={clubUsersList}
             onSuccessForm={() => setOpen(false)}
           />

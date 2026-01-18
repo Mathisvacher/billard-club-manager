@@ -24,13 +24,13 @@ import { MatchFormSchema } from "@/src/lib/schema/match.schema";
 import { Loader2 } from "lucide-react";
 
 interface MatchFormProps {
-  user: Prisma.UserModel;
   clubUsersList: Prisma.UserModel[];
   onSuccessForm?: () => void;
+  userAuthId?: string;
 }
 
 export default function MatchForm({
-  user,
+  userAuthId,
   clubUsersList,
   onSuccessForm,
 }: MatchFormProps) {
@@ -45,20 +45,6 @@ export default function MatchForm({
     },
   });
 
-  const userOptions = clubUsersList
-    .filter((userClub) => userClub.id != user.id)
-    .map((user) => ({
-      label: `${user.name} ${user.lastName} (${user.currentHandicap})`,
-      value: user.id,
-    }));
-
-  const matchTypeOptions = Object.entries(MatchTypeLabels).map(
-    ([value, label]) => ({
-      value: value as keyof typeof MatchTypeLabels,
-      label,
-    })
-  );
-
   const form = useForm<z.infer<typeof MatchFormSchema>>({
     resolver: zodResolver(MatchFormSchema),
     defaultValues: {
@@ -72,6 +58,28 @@ export default function MatchForm({
       date: new Date(),
     },
   });
+
+  const user = clubUsersList.find((user) => user.id === userAuthId);
+  if (!user) {
+    console.error("Current user not found :/", {
+      sessionUserId: userAuthId,
+    });
+    return null;
+  }
+
+  const userOptions = clubUsersList
+    .filter((userClub) => userClub.id != user.id)
+    .map((user) => ({
+      label: `${user.name} ${user.lastName} (${user.currentHandicap})`,
+      value: user.id,
+    }));
+
+  const matchTypeOptions = Object.entries(MatchTypeLabels).map(
+    ([value, label]) => ({
+      value: value as keyof typeof MatchTypeLabels,
+      label,
+    }),
+  );
 
   // Calcul de moyenne
   const pointsPlayer1 = form.watch("pointsPlayer1");
@@ -197,6 +205,3 @@ export default function MatchForm({
     </Form>
   );
 }
-
-// {loginForm.formState.isSubmitting ? (
-//  <Loader2 className="animate-spin" />
