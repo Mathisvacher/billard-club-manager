@@ -5,6 +5,7 @@ import { getClubPlayersForCurrentUser } from "@/src/lib/data/club.data";
 import MatchesCards from "./matches-cards";
 import { getUserMatchs } from "@/src/lib/data/match.data";
 import { MatchCardDTO } from "@/src/lib/utils";
+import AppCard from "@/src/components/shared/app-card";
 
 export default async function MatchesSection() {
   const userAuth = await getUser();
@@ -40,13 +41,11 @@ export default async function MatchesSection() {
   });
 
   return (
-    <div className="flex flex-col w-full h-full bg-card  border border-border-light rounded-2xl p-4">
-      {/* Header */}
-      <div className="flex items-center justify-between w-full">
-        <h1 className="font-semibold text-2xl whitespace-nowrap">Mes matchs</h1>
-        <NewMatchBtn clubUsersList={clubPlayers} />
-      </div>
+    <AppCard
+      title="Mes matchs"
+      action={<NewMatchBtn clubUsersList={clubPlayers} />}
+    >
       <MatchesCards matches={orderedMatchesDTO} />
-    </div>
+    </AppCard>
   );
 }
