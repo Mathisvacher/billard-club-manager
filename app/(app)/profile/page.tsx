@@ -1,34 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/src/components/ui/card";
-import { getUser } from "@/src/lib/auth/auth-server";
-import { unauthorized } from "next/navigation";
+import MatchesSection from "./(components)/(matches)/matches-section";
+import OpponentSection from "./(components)/(opponent)/opponent-section";
+import StatsSection from "./(components)/(stats)/stats-section";
 
-export default async function ProfilePage() {
-  const user = await getUser();
-  if (!user) {
-    return unauthorized();
-  }
+export default function MatchsPage() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>User profile</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col">
-            <span className="text-sm text-muted-foreground">Name</span>
-            <span>{user.name}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm text-muted-foreground">Email</span>
-            <span>{user.email}</span>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="w-full h-full flex justify-center items-center gap-3">
+      <MatchesSection />
+      <div className="flex flex-col gap-3 h-full w-full">
+        <StatsSection />
+        <OpponentSection />
+      </div>
+    </div>
   );
 }

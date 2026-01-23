@@ -1,3 +1,4 @@
+// Match type
 export const MatchTypeEnum = {
   LIBRE: "LIBRE",
   CADRE: "CADRE",

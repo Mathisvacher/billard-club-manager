@@ -21,9 +21,7 @@ export const SidebarButton = ({ root, icon, label }: SidebarButtonProps) => {
       className={clsx(
         "flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg transition-all",
         "hover:bg-white hover:shadow-sm",
-        isActive
-          ? "bg-white shadow-sm text-foreground"
-          : "text-muted-foreground"
+        isActive ? "bg-card shadow-sm text-foreground" : "text-muted-foreground"
       )}
     >
       <span

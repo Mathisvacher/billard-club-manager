@@ -25,6 +25,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
+import { dateFormat } from "@/src/lib/utils";
 
 type FormFieldProps = {
   form: UseFormReturn<any>;
@@ -252,8 +253,6 @@ function DateField({
   placeholder,
   icon: Icon,
 }: FormFieldProps) {
-  const dateFormat = "EEE dd MMM";
-
   return (
     <FormField
       control={form.control}
@@ -280,9 +279,6 @@ function DateField({
                 mode="single"
                 selected={field.value}
                 onSelect={(date) => field.onChange(date)}
-                disabled={(date) =>
-                  date.getTime() < new Date().setHours(0, 0, 0, 0)
-                }
               />
             </PopoverContent>
           </Popover>

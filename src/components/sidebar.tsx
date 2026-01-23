@@ -29,9 +29,9 @@ export default function Sidebar() {
         {/* User section */}
         <div className="flex flex-col gap-1.5">
           <SidebarButton
-            root={ROUTES.matches}
-            icon={<Sword />}
-            label="Mes matchs"
+            root={ROUTES.profile}
+            icon={<User />}
+            label="Mon profile"
           />
           <SidebarButton
             root={ROUTES.clubMatches}
@@ -43,11 +43,7 @@ export default function Sidebar() {
             icon={<ChartColumnBig />}
             label="Classement"
           />
-          <SidebarButton
-            root={ROUTES.profile}
-            icon={<User />}
-            label="Mon profile"
-          />
+
           <SidebarButton
             root={ROUTES.help}
             icon={<HelpCircle />}
